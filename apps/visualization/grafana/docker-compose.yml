@@ -1,0 +1,15 @@
+
+services:
+  grafana:
+    image: grafana/grafana
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.grafana.rule=Host(`grafana.test`)"
+      - "traefik.http.services.grafana.loadbalancer.server.port=3000"
+    restart: "no"
+    networks:
+      - devops-net
+
+networks:
+  devops-net:
+    external: true

@@ -1,0 +1,13 @@
+services:
+  vault:
+    image: hashicorp/vault
+    command: server -dev
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.vault.rule=Host(`vault.test`)"
+      - "traefik.http.services.vault.loadbalancer.server.port=8200"
+    networks:
+      - devops-net
+networks:
+  devops-net:
+    external: true

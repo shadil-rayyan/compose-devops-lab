@@ -1,0 +1,17 @@
+
+services:
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.prometheus.rule=Host(`prometheus.test`)"
+      - "traefik.http.services.prometheus.loadbalancer.server.port=9090"
+    restart: "no"
+    networks:
+      - devops-net
+
+networks:
+  devops-net:
+    external: true

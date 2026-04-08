@@ -1,0 +1,12 @@
+services:
+  alertmanager:
+    image: prom/alertmanager
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.alertmanager.rule=Host(`alertmanager.test`)"
+      - "traefik.http.services.alertmanager.loadbalancer.server.port=9093"
+    networks:
+      - devops-net
+networks:
+  devops-net:
+    external: true

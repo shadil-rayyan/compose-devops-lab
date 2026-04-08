@@ -1,0 +1,13 @@
+services:
+  trivy:
+    image: aquasec/trivy:latest
+    command: server --listen 0.0.0.0:4954
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.trivy.rule=Host(`trivy.test`)"
+      - "traefik.http.services.trivy.loadbalancer.server.port=4954"
+    networks:
+      - devops-net
+networks:
+  devops-net:
+    external: true

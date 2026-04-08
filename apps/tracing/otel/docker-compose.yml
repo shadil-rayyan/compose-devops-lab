@@ -1,0 +1,13 @@
+services:
+  otel:
+    image: otel/opentelemetry-collector:latest
+    command: ["--config=/etc/otel/config.yaml"]
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.otel.rule=Host(`otel.test`)"
+      - "traefik.http.services.otel.loadbalancer.server.port=4318"
+    networks:
+      - devops-net
+networks:
+  devops-net:
+    external: true

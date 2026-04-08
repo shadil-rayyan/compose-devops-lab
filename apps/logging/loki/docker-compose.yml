@@ -1,0 +1,13 @@
+services:
+  loki:
+    image: grafana/loki:latest
+    command: -config.file=/etc/loki/local-config.yaml
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.loki.rule=Host(`loki.test`)"
+      - "traefik.http.services.loki.loadbalancer.server.port=3100"
+    networks:
+      - devops-net
+networks:
+  devops-net:
+    external: true

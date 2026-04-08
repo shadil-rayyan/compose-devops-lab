@@ -1,0 +1,12 @@
+services:
+  sonarqube:
+    image: sonarqube:community
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.sonarqube.rule=Host(`sonarqube.test`)"
+      - "traefik.http.services.sonarqube.loadbalancer.server.port=9000"
+    networks:
+      - devops-net
+networks:
+  devops-net:
+    external: true
