@@ -6,6 +6,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.otel.rule=Host(`otel.test`)"
       - "traefik.http.services.otel.loadbalancer.server.port=4318"
+    restart: "no"
     networks:
       - devops-net
 networks:

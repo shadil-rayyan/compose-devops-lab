@@ -5,6 +5,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.alertmanager.rule=Host(`alertmanager.test`)"
       - "traefik.http.services.alertmanager.loadbalancer.server.port=9093"
+    restart: "no"
     networks:
       - devops-net
 networks:

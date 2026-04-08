@@ -6,6 +6,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.trivy.rule=Host(`trivy.test`)"
       - "traefik.http.services.trivy.loadbalancer.server.port=4954"
+    restart: "no"
     networks:
       - devops-net
 networks:

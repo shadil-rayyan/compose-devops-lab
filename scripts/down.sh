@@ -1,7 +1,20 @@
 #!/bin/bash
 
-docker compose -f apps/backstage/docker-compose.yml down
-docker compose -f apps/grafana/docker-compose.yml down
-docker compose -f apps/prometheus/docker-compose.yml down
-docker compose -f apps/jenkins/docker-compose.yml down
-docker compose -f infra/traefik/docker-compose.yml down
+echo "🛑 Stopping DevOps Lab..."
+
+# Stop Traefik
+if [ -f infra/traefik/docker-compose.yml ]; then
+    echo "🌐 Stopping Traefik..."
+    docker compose -f infra/traefik/docker-compose.yml down
+fi
+
+# Find all docker-compose files in apps/
+echo "🔍 Discovering services to stop..."
+mapfile -t COMPOSE_FILES < <(find apps -name "docker-compose.yml" | sort -r)
+
+for file in "${COMPOSE_FILES[@]}"; do
+    echo "▶️ Stopping $(dirname $file)..."
+    docker compose -f "$file" down || true
+done
+
+echo "✅ All services stopped!"

@@ -5,6 +5,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.nexus.rule=Host(`nexus.test`)"
       - "traefik.http.services.nexus.loadbalancer.server.port=8081"
+    restart: "no"
     networks:
       - devops-net
 

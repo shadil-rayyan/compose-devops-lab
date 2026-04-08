@@ -5,6 +5,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.sonarqube.rule=Host(`sonarqube.test`)"
       - "traefik.http.services.sonarqube.loadbalancer.server.port=9000"
+    restart: "no"
     networks:
       - devops-net
 networks:

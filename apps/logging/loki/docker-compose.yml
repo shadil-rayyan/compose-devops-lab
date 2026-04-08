@@ -6,6 +6,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.loki.rule=Host(`loki.test`)"
       - "traefik.http.services.loki.loadbalancer.server.port=3100"
+    restart: "no"
     networks:
       - devops-net
 networks:

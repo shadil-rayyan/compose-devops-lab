@@ -6,6 +6,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.vault.rule=Host(`vault.test`)"
       - "traefik.http.services.vault.loadbalancer.server.port=8200"
+    restart: "no"
     networks:
       - devops-net
 networks:
